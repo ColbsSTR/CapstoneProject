@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, View } from 'react-native';
-import Icon from 'react-native-ionicons'
+import { Icon } from 'react-native-elements'
 
 const TabIcon = (props) => (
     <Icon
