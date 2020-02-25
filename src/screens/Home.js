@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-ionicons'
+import { Icon } from 'react-native-elements'
 
 const TabIcon = (props) => (
     <Icon
-      name={"home"}
+			name='home'
+  		type='font-awesome'
       size={35}
       color={props.focused ? 'grey' : 'darkgrey'}
     />
