@@ -1,10 +1,8 @@
-import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 
-const BottomTabNavigator = createBottomTabNavigator({
+const MainNavigator = createBottomTabNavigator({
     Home: Home,
     Profile: Profile
     }, {
@@ -13,4 +11,4 @@ const BottomTabNavigator = createBottomTabNavigator({
     }
 });
 
-export default BottomTabNavigator;
+export default MainNavigator;
