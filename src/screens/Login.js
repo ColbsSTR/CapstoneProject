@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
+//import { Button, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements'
+import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 
 const TabIcon = (props) => (
     <Icon
@@ -27,11 +28,29 @@ export default class Login extends Component {
 
     }
 
+    signIn() {
+        this.props.navigation.navigate('Home');
+    }
+
     render() {
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Button title="Login" onPress={() => {this.props.navigation.navigate('Home')}}>Login</Button>
-            </View>
+            <Container>
+                <Content padder>
+                <Form>
+                    <Item floatingLabel>
+                    <Label>Username</Label>
+                    <Input />
+                    </Item>
+                    <Item floatingLabel last>
+                    <Label>Password</Label>
+                    <Input />
+                    </Item>
+                </Form>
+                <Content style={{ paddingTop: 20}}>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} primary onPress={() => { this.signIn() }}><Text> Login </Text></Button>
+                </Content>
+                </Content>
+            </Container>
         );
     }
 }
