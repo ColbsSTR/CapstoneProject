@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import { Button, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements'
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
+import { Alert } from 'react-native';
 
 const TabIcon = (props) => (
     <Icon
@@ -20,7 +21,8 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-
+            username: '',
+            password: ''
         };
     }
 
@@ -29,7 +31,11 @@ export default class Login extends Component {
     }
 
     signIn() {
-        this.props.navigation.navigate('Home');
+        if (this.state.username || this.state.password === '') {
+            Alert.alert('Please Fill Out Both Fields');
+        } else {
+            this.props.navigation.navigate('Home');
+        }
     }
 
     render() {
@@ -39,11 +45,11 @@ export default class Login extends Component {
                 <Form>
                     <Item floatingLabel>
                     <Label>Username</Label>
-                    <Input />
+                    <Input onChangeText={(text) => {this.setState({username: text})}}/>
                     </Item>
                     <Item floatingLabel last>
                     <Label>Password</Label>
-                    <Input />
+                    <Input onChangeText={(text) => {this.setState({password: text})}}/>
                     </Item>
                 </Form>
                 <Content style={{ paddingTop: 20}}>
