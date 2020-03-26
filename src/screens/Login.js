@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-//import { Button, View, Text } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+import { StyleSheet, Image, View, Modal } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 import { Alert } from 'react-native';
+import COLORS from '../assets/colors';
 
 const TabIcon = (props) => (
     <Icon
@@ -14,7 +15,11 @@ const TabIcon = (props) => (
 
 export default class Login extends Component {
     static navigationOptions = {
-        tabBarIcon: TabIcon
+        tabBarIcon: TabIcon,
+        headerShown: false,
+        headerTitleStyle: {
+            color: COLORS.beige,
+        },
     };
 
     constructor(props) {
@@ -31,32 +36,39 @@ export default class Login extends Component {
     }
 
     signIn() {
-        if (this.state.username || this.state.password === '') {
+        if (this.state.username === '' || this.state.password === '') {
             Alert.alert('Please Fill Out Both Fields');
         } else {
+
             this.props.navigation.navigate('Home');
         }
     }
 
     render() {
         return (
-            <Container>
+            <Container style={{ backgroundColor: COLORS.darkGrey}}>
                 <Content padder>
                 <Form>
                     <Item floatingLabel>
-                    <Label>Username</Label>
-                    <Input onChangeText={(text) => {this.setState({username: text})}}/>
+                    <Label style={styles.textColor}>Username</Label>
+                    <Input style={styles.textColor} onChangeText={(text) => {this.setState({username: text})}}/>
                     </Item>
                     <Item floatingLabel last>
-                    <Label>Password</Label>
-                    <Input onChangeText={(text) => {this.setState({password: text})}}/>
+                    <Label style={styles.textColor}>Password</Label>
+                    <Input style={styles.textColor} onChangeText={(text) => {this.setState({password: text})}}/>
                     </Item>
                 </Form>
                 <Content style={{ paddingTop: 20}}>
-                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} primary onPress={() => { this.signIn() }}><Text> Login </Text></Button>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.cyan}} onPress={() => { this.signIn() }}><Text style={styles.textColor}> Login </Text></Button>
                 </Content>
                 </Content>
             </Container>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    textColor: {
+        color: COLORS.beige
+    }
+})
