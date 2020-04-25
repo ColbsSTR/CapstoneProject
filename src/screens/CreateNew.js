@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Content, Item, Input } from 'native-base';
+import { Container, Content, Item, Input, Header, Left, Right, Title, Body } from 'native-base';
 import { Icon } from 'react-native-elements';
 
 export default class CreateNew extends Component {
+
     static navigationOptions = {
-        title: "Create New",
+        title: 'Create New User',
+        headerShown: true,
     };
 
     constructor(props) {
@@ -15,33 +17,38 @@ export default class CreateNew extends Component {
             password: '',
             rePassword: '',
             error: false,
+            success: false,
         };
     }
 
     componentDidMount() {
-
+        
     }
 
     render() {
+
+        console.log('password: ', this.state.password);
+
         return (
-            <Container>
-               <Content>
-               <Item>
-                   <Icon
-                   name={"home"}
-                   size={35}
-                   color={'darkgrey'}
-                   />
-                   <Input onChangeText={(text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
-               </Item>
-               <Item>
-                   <Input placeholder='Enter Password'/>
-               </Item>
-               <Item>
-                   <Input placeholder= 'Repeat Password'/>
-               </Item>
-               </Content>
-           </Container>
-       );
+             <Container>
+                <Content>
+                <Item>
+                    <Icon
+                    name={"home"}
+                    size={35}
+                    color={'darkgrey'}
+                    />
+                    <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
+                </Item>
+                <Item>
+                    <Input onChangeText={ (text) => { this.setState({ password: text})}} placeholder='Enter Password'/>
+                </Item>
+                <Item>
+                    <Input onChangeText={ (text) => { this.setState({ rePassword: text})}} placeholder= 'Repeat Password'/>
+                    <Icon name={"check"} />
+                </Item>
+                </Content>
+            </Container>
+        );
     }
 }
