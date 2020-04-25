@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, Image, View, Modal } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 import { Alert } from 'react-native';
 import COLORS from '../assets/colors';
@@ -44,6 +44,11 @@ export default class Login extends Component {
         }
     }
 
+    createNew()
+    {
+        this.props.navigation.navigate('CreateNew');
+    }
+
     render() {
         return (
             <Container style={{ backgroundColor: COLORS.darkGrey}}>
@@ -59,10 +64,16 @@ export default class Login extends Component {
                     </Item>
                 </Form>
                 <Content style={{ paddingTop: 20}}>
-                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.cyan}} onPress={() => { this.signIn() }}><Text style={styles.textColor}> Login </Text></Button>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.signIn() }}><Text style={styles.textColor}> Login </Text></Button>
+                </Content>
+                <Content>
+                    <Button onPress={() => { this.createNew() }} transparent style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <Text>Create New User</Text>
+                    </Button>
                 </Content>
                 </Content>
             </Container>
+
         );
     }
 }
