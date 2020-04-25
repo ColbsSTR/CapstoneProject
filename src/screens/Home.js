@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Icon, Overlay } from 'react-native-elements'
 import { Container, Content, Card, CardItem, Body, Left } from 'native-base';
 import COLORS from '../assets/colors';
@@ -82,7 +82,7 @@ export default class Home extends Component {
                                     type='font-awesome'
                                 />
                                 <Body>
-                                    <Text style={{ color: 'darkblue', paddingBottom: 5}}>{item.name}</Text>
+                                    <Text style={{ color: '#F19C00', paddingBottom: 5}}>{item.name}</Text>
                                 </Body>
                             </Left>
                         </CardItem>
@@ -108,6 +108,11 @@ export default class Home extends Component {
     render() {
         return (
             <Container style={styles.background}> 
+                    <Image
+                    source ={require('../../images/homelogo.png')} 
+                    resizeMode="contain"
+                    style={{ alignSelf: 'center', marginTop: 20, width: '100%', height: '12%' }}
+                    />
                 <Content>
                     <FlatList
                         data={this.state.events}
@@ -122,9 +127,9 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
    background: {
-       backgroundColor: 'white'
+       backgroundColor: 'white',
    },
    card: {
-       backgroundColor: 'white'
+       backgroundColor: COLORS.appBackground
    }
 });

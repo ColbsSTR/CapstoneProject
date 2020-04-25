@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
-import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
+import { Container, Content, Form, Item, Input, Label, Button, Text, Header, Title } from 'native-base';
 import { Alert } from 'react-native';
 import COLORS from '../assets/colors';
 
@@ -18,7 +18,7 @@ export default class Login extends Component {
         tabBarIcon: TabIcon,
         headerShown: false,
         headerTitleStyle: {
-            color: COLORS.beige,
+            color: 'black',
         },
     };
 
@@ -58,7 +58,7 @@ export default class Login extends Component {
                     <Label style={styles.textColor}>Username</Label>
                     <Input style={styles.textColor} onChangeText={(text) => {this.setState({username: text})}}/>
                     </Item>
-                    <Item floatingLabel last>
+                    <Item floatingLabel>
                     <Label style={styles.textColor}>Password</Label>
                     <Input style={styles.textColor} onChangeText={(text) => {this.setState({password: text})}}/>
                     </Item>
