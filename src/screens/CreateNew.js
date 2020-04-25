@@ -3,11 +3,18 @@ import { Container, Content, Item, Input } from 'native-base';
 import { Icon } from 'react-native-elements';
 
 export default class CreateNew extends Component {
+    static navigationOptions = {
+        title: "Create New",
+    };
+
     constructor(props) {
         super(props);
 
         this.state = {
-
+            username: '',
+            password: '',
+            rePassword: '',
+            error: false,
         };
     }
 
@@ -17,21 +24,24 @@ export default class CreateNew extends Component {
 
     render() {
         return (
-             <Container>
-                <Content>
-                <Item>
-                    <Icon
-                    name={"home"}
-                    size={35}
-                    color={'darkgrey'}
-                    />
-                    <Input placeholder='Icon Textbox'/>
-                </Item>
-                <Item>
-                    <Input placeholder='Icon Alignment in Textbox'/>
-                </Item>
-                </Content>
-            </Container>
-        );
+            <Container>
+               <Content>
+               <Item>
+                   <Icon
+                   name={"home"}
+                   size={35}
+                   color={'darkgrey'}
+                   />
+                   <Input onChangeText={(text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
+               </Item>
+               <Item>
+                   <Input placeholder='Enter Password'/>
+               </Item>
+               <Item>
+                   <Input placeholder= 'Repeat Password'/>
+               </Item>
+               </Content>
+           </Container>
+       );
     }
 }

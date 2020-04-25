@@ -3,11 +3,11 @@ import Login from '../screens/Login';
 import CreateNew from '../screens/CreateNew';
 
 const AuthNavigator = createStackNavigator({
-  CreateNew: {
-    screen: CreateNew,
-  },
   Login: {
     screen: Login,
+  },
+  CreateNew: {
+    screen: CreateNew,
   },
 });
 
