@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Content, Item, Input, Header, Left, Right, Title, Body } from 'native-base';
+import { Container, Content, Item, Input, Button, Text, Right, Title, Body, Form } from 'native-base';
 import { Icon } from 'react-native-elements';
+import COLORS from '../assets/colors';
 
 export default class CreateNew extends Component {
 
@@ -17,7 +18,6 @@ export default class CreateNew extends Component {
             password: '',
             rePassword: '',
             error: false,
-            success: false,
         };
     }
 
@@ -25,28 +25,40 @@ export default class CreateNew extends Component {
         
     }
 
+    setRePassword(text)
+    {
+        if (text === this.state.password) {
+            this.setState({ rePassword: text, error: false});
+        } else if (text === '') {
+            this.setState({ rePassword: '', error: false});
+        } else {
+            this.setState({ rePassword: text, error: true});
+        }
+    }
+
     render() {
-
-        console.log('password: ', this.state.password);
-
         return (
              <Container>
                 <Content>
+                    <Form>
                 <Item>
-                    <Icon
-                    name={"home"}
-                    size={35}
-                    color={'darkgrey'}
-                    />
                     <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
                 </Item>
                 <Item>
                     <Input onChangeText={ (text) => { this.setState({ password: text})}} placeholder='Enter Password'/>
                 </Item>
                 <Item>
-                    <Input onChangeText={ (text) => { this.setState({ rePassword: text})}} placeholder= 'Repeat Password'/>
-                    <Icon name={"check"} />
+                    <Input onChangeText={ (text) => { this.setRePassword(text)}} placeholder= 'Repeat Password'/>
+                    <Icon name={this.state.error ? 'times-circle' : 'check'} type='font-awesome'/>
                 </Item>
+                </Form>
+                <Content style={{ paddingTop: 20}}>
+                <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.props.navigation.navigate('Home')}}>
+                    <Text>
+                        Create Account
+                    </Text>
+                </Button>
+                </Content>
                 </Content>
             </Container>
         );

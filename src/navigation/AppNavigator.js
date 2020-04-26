@@ -9,7 +9,7 @@ export const createRootNavigator = () => {
       main: MainNavigator
     },
     {
-      initialRouteName: 'auth'
+      initialRouteName: 'main'
     }
   );
 }
