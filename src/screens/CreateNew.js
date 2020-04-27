@@ -38,29 +38,27 @@ export default class CreateNew extends Component {
 
     render() {
         return (
-             <Container>
-                <Content>
+             <Container style={{ backgroundColor: COLORS.appBackground}}>
+                <Content padder>
                     <Form>
-                <Item>
-                    <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
-                </Item>
-                <Item>
-                    <Input onChangeText={ (text) => { this.setState({ password: text})}} placeholder='Enter Password'/>
-                </Item>
-                <Item>
-                    <Input onChangeText={ (text) => { this.setRePassword(text)}} placeholder= 'Repeat Password'/>
-                    <Icon name={this.state.error ? 'times-circle' : 'check'} type='font-awesome'/>
-                </Item>
-                </Form>
+                        <Item>
+                            <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
+                        </Item>
+                        <Item>
+                            <Input onChangeText={ (text) => { this.setState({ password: text})}} placeholder='Enter Password'/>
+                        </Item>
+                        <Item>
+                            <Input onChangeText={ (text) => { this.setRePassword(text)}} placeholder= 'Repeat Password'/>
+                            <Icon name={this.state.error ? 'times-circle' : 'check'} type='font-awesome'/>
+                        </Item>
+                    </Form>
                 <Content style={{ paddingTop: 20}}>
-                <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.props.navigation.navigate('Home')}}>
-                    <Text>
-                        Create Account
-                    </Text>
-                </Button>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.props.navigation.navigate('Home')}}>
+                        <Text> Create Account </Text>
+                    </Button>
                 </Content>
                 </Content>
-            </Container>
+             </Container>
         );
     }
 }

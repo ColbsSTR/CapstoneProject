@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, Alert } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Text, Header, Title } from 'native-base';
-import { Alert } from 'react-native';
 import COLORS from '../assets/colors';
 
 const TabIcon = (props) => (
@@ -51,24 +50,29 @@ export default class Login extends Component {
 
     render() {
         return (
-            <Container style={{ backgroundColor: COLORS.darkGrey}}>
+            <Container style={{ backgroundColor: COLORS.appBackground}}>
+                <Image 
+                source={require('../../images/homelogo.png')} 
+                resizeMode="contain"
+                style={{ alignSelf: 'center', marginTop: 20, width: '100%', height: '12%' }}
+                />
                 <Content padder>
                 <Form>
                     <Item floatingLabel>
-                    <Label style={styles.textColor}>Username</Label>
+                    <Label> Username </Label>
                     <Input style={styles.textColor} onChangeText={(text) => {this.setState({username: text})}}/>
                     </Item>
                     <Item floatingLabel>
-                    <Label style={styles.textColor}>Password</Label>
+                    <Label> Password </Label>
                     <Input style={styles.textColor} onChangeText={(text) => {this.setState({password: text})}}/>
                     </Item>
                 </Form>
                 <Content style={{ paddingTop: 20}}>
-                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.signIn() }}><Text style={styles.textColor}> Login </Text></Button>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.signIn() }}><Text> Login </Text></Button>
                 </Content>
                 <Content>
                     <Button onPress={() => { this.createNew() }} transparent style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                        <Text>Create New User</Text>
+                        <Text style={{color: '#F19C00'}}>Create New User</Text>
                     </Button>
                 </Content>
                 </Content>
@@ -80,6 +84,6 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
     textColor: {
-        color: COLORS.beige
+        color: 'black'
     }
 })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Icon, Overlay } from 'react-native-elements'
-import { Container, Content, Card, CardItem, Body, Left } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Left, Button, List, ListItem } from 'native-base';
 import COLORS from '../assets/colors';
 
 const TabIcon = (props) => (
@@ -60,12 +60,33 @@ export default class Home extends Component {
                     onBackdropPress={() => this.setState({ modalVisible: false })}
                     width="90%"
                     height="90%"
-                >
-                    <View style={{marginTop: 22}}>
-                    <View>
-                        <Text>Detail view!</Text>
+                    overlayBackgroundColor="#FEF2E4"
+            >
+                <View style={{marginTop: 22, flex: 1, justifyContent: 'center', marginBottom: 20}}>
+                    <List>
+                        <ListItem listHeader first>
+                            <Text style={styles.listHeader}>Event Details:</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Coordinator:</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Participation Fee:</Text>
+                        </ListItem>
+                    </List>
+                    <View style={{flex: 1, flexDirection: 'row', paddingTop: 30}}>
+                        <View style={{flex:1}}>
+                            <Button style={{justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey, marginRight: 10}}>
+                                <Text style={{color: 'white'}}> Save Event </Text>
+                            </Button>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Button style={{justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey, marginLeft: 10}}>
+                                <Text style={{color: 'white'}}> Something </Text>
+                            </Button>
+                        </View>
                     </View>
-                    </View>
+                </View>
             </Overlay>
         );
     }
@@ -109,7 +130,7 @@ export default class Home extends Component {
         return (
             <Container style={styles.background}> 
                     <Image
-                    source ={require('../../images/homelogo.png')} 
+                    source={require('../../images/homelogo.png')} 
                     resizeMode="contain"
                     style={{ alignSelf: 'center', marginTop: 20, width: '100%', height: '12%' }}
                     />
@@ -131,5 +152,11 @@ const styles = StyleSheet.create({
    },
    card: {
        backgroundColor: COLORS.appBackground
-   }
+   },
+   listHeader: {
+        fontWeight: "bold",
+        fontSize: 20,
+        paddingBottom: 0,
+        paddingTop: 10
+    }
 });
