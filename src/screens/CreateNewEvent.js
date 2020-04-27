@@ -53,7 +53,7 @@ export default class Create extends Component {
                         </Item>
                     </Form>
                     <Content style={{ paddingTop: 40}}>
-                        <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} title="Create Event">
+                        <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }} title="Create Event">
                         </Button>
                     </Content>
                 </Content>
