@@ -29,8 +29,18 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text>Hello from the profile screen</Text>
+            <View style={{flex: 1}}>
+                <View style={{flex: 1, backgroundColor: 'black'}}>
+
+                </View>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={{flex: 1, backgroundColor: 'red'}}>
+
+                    </View>
+                    <View style={{flex: 1, backgroundColor: 'orange'}}>
+
+                    </View>
+                </View>
             </View>
         );
     }

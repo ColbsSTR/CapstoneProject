@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Content, Item, Input, Button, Text, Right, Title, Body, Form } from 'native-base';
 import { Icon } from 'react-native-elements';
 import COLORS from '../assets/colors';
+import { Alert } from 'react-native';
 
 export default class CreateNew extends Component {
 
@@ -17,7 +18,7 @@ export default class CreateNew extends Component {
             username: '',
             password: '',
             rePassword: '',
-            error: false,
+            equal: true,
         };
     }
 
@@ -25,42 +26,62 @@ export default class CreateNew extends Component {
         
     }
 
+    setPassword(text)
+    {
+        if (text === this.state.rePassword) {
+            this.setState({ password: text, equal: true});
+        } else if (text === '') {
+            this.setState({ password: '', equal: true});
+        } else {
+            this.setState({ password: text, equal: false});
+        }
+    }
+
     setRePassword(text)
     {
         if (text === this.state.password) {
-            this.setState({ rePassword: text, error: false});
+            this.setState({ rePassword: text, equal: true});
         } else if (text === '') {
-            this.setState({ rePassword: '', error: false});
+            this.setState({ rePassword: '', equal: true});
         } else {
-            this.setState({ rePassword: text, error: true});
+            this.setState({ rePassword: text, equal: false});
+        }
+    }
+
+    createUser()
+    {
+        if(this.state.equal === false) {
+            Alert.alert('Password do not match.');
+        } else if(this.state.password.length < 6) {
+            Alert.alert('Please enter a longer password.');
+        } else {
+            this.props.navigation.navigate('Home');
         }
     }
 
     render() {
         return (
-             <Container>
-                <Content>
+             <Container style={{ backgroundColor: COLORS.appBackground}}>
+                <Content padder>
                     <Form>
-                <Item>
-                    <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
-                </Item>
-                <Item>
-                    <Input onChangeText={ (text) => { this.setState({ password: text})}} placeholder='Enter Password'/>
-                </Item>
-                <Item>
-                    <Input onChangeText={ (text) => { this.setRePassword(text)}} placeholder= 'Repeat Password'/>
-                    <Icon name={this.state.error ? 'times-circle' : 'check'} type='font-awesome'/>
-                </Item>
-                </Form>
+                        <Item>
+                            <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
+                        </Item>
+                        <Item>
+                            <Input onChangeText={ (text) => { this.setPassword(text)}} placeholder='Enter Password'/>
+                        </Item>
+                        <Item>
+                            <Input onChangeText={ (text) => { this.setRePassword(text)}} placeholder= 'Repeat Password'/>
+                            <Icon name={this.state.equal ? 'check' : 'times-circle'} type='font-awesome'/>
+                        </Item>
+                    </Form>
                 <Content style={{ paddingTop: 20}}>
-                <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.props.navigation.navigate('Home')}}>
-                    <Text>
-                        Create Account
-                    </Text>
-                </Button>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} onPress={() => { this.createUser()}}>
+                        <Text> Create Account </Text>
+                    </Button>
                 </Content>
                 </Content>
-            </Container>
+             </Container>
         );
     }
 }

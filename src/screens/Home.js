@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Icon, Overlay } from 'react-native-elements'
-import { Container, Content, Card, CardItem, Body, Left } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Left, Button, List, ListItem } from 'native-base';
 import COLORS from '../assets/colors';
 
 const TabIcon = (props) => (
@@ -27,7 +27,9 @@ export default class Home extends Component {
                 {
                   name: 'Event 1',
                   description: 'Carreer fair for all students',
-                  venue: 'Bud Walton'
+                  venue: 'Bud Walton',
+                  coordinator: 'Alex Frey',
+                  fee: 25
                 },
                 {
                   name: 'Event 2',
@@ -45,7 +47,8 @@ export default class Home extends Component {
                     venue: 'Bud Walton'
                   },
               ],
-              modalVisible: false
+              modalVisible: false,
+              selected: 0
         };
     }
 
@@ -60,25 +63,41 @@ export default class Home extends Component {
                     onBackdropPress={() => this.setState({ modalVisible: false })}
                     width="90%"
                     height="90%"
-                >
-                    <View style={{marginTop: 22}}>
-                    <View>
-                        <Text>Detail view!</Text>
+                    overlayBackgroundColor="#FEF2E4"
+            >
+                <View style={{marginTop: 22, flex: 1, justifyContent: 'center', marginBottom: 20}}>
+                    <List>
+                        <ListItem listHeader first>
+                            <Text style={styles.listHeader}>Event Details: {this.state.events[this.state.selected].description}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Coordinator: {this.state.events[this.state.selected].coordinator}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Participation Fee: {this.state.events[this.state.selected].fee}</Text>
+                        </ListItem>
+                    </List>
+                    <View style={{flex: 1, flexDirection: 'row', paddingTop: 30}}>
+                        <View style={{flex:1}}>
+                            <Button style={{justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey, marginRight: 10}}>
+                                <Text style={{color: 'white'}}> Attend </Text>
+                            </Button>
+                        </View>
                     </View>
-                    </View>
+                </View>
             </Overlay>
         );
     }
 
-    eventCard(item) {
+    eventCard(item, index) {
         return (
-            <TouchableOpacity onPress={() => {this.setState({modalVisible: true})}}>
+            <TouchableOpacity onPress={() => {this.setState({modalVisible: true, selected: index})}}>
                 <Content style={{ padding: 5 }}>
                     <Card>
                         <CardItem header bordered style={styles.card}>
                             <Left>
                                 <Icon
-                                    name='place'
+                                    name='users'
                                     type='font-awesome'
                                 />
                                 <Body>
@@ -116,7 +135,7 @@ export default class Home extends Component {
                 <Content>
                     <FlatList
                         data={this.state.events}
-                        renderItem={({item}) => this.eventCard(item)}
+                        renderItem={({item, index}) => this.eventCard(item, index)}
                     />
                 </Content>
                 {this.detailView()}
@@ -126,10 +145,16 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-   background: {
-       backgroundColor: 'white',
-   },
-   card: {
-       backgroundColor: COLORS.appBackground
-   }
-});
+    background: {
+        backgroundColor: 'white',
+    },
+    card: {
+        backgroundColor: COLORS.appBackground
+    },
+    listHeader: {
+         fontWeight: "bold",
+         fontSize: 20,
+         paddingBottom: 0,
+         paddingTop: 10
+     }
+ });

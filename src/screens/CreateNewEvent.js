@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Picker, Button, Image } from 'react-native';
+import { Button, DatePickerIOS } from 'react-native'; 
 import { Icon } from 'react-native-elements';
-import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
-
+import { Container, Content, Form, Item, Input, Label, Picker } from 'native-base';
+import COLORS from '../assets/colors';
 
 const TabIcon = (props) => (
     <Icon
@@ -25,7 +25,8 @@ export default class Create extends Component {
         super(props);
 
         this.state = {
-
+            date: new Date(),
+            language: 'java'
         };
     }
 
@@ -37,63 +38,47 @@ export default class Create extends Component {
         return (
             <Container>
                 <Content>
-                <Form>
-                    <Item stackedLabel>
-                    <Label>Username</Label>
-                    <Input />
-                    </Item>
-                    <Item stackedLabel last>
-                    <Label>Password</Label>
-                    <Input />
-                    </Item>
-                </Form>
+                    <Form>
+                        <Item stackedLabel>
+                            <Item>
+                                <Label>Event Name</Label>
+                                <Input />
+                            </Item>
+                            <Item>
+                                <Label>Event Description</Label>
+                                <Input regular/>
+                            </Item>
+                        </Item>
+                        <Item picker>
+                                <Picker
+                                    mode="dropdown"
+                                    iosIcon={<Icon name={"arrow-down"}/>}
+                                    style={{ width: undefined }}
+                                    placeholder="Select your SIM"
+                                    //placeholderStyle={{ color: "black" }}
+                                    placeholderIconColor="#007aff"
+                                    selectedValue="Computer Science"
+                                    onValueChange={(val) => {this.setState({selected2: val})}}
+                                >
+                                    <Picker.Item label="Computer Science" value="Computer Science" />
+                                    <Picker.Item label="ATM Card" value="key1" />
+                                    <Picker.Item label="Debit Card" value="key2" />
+                                    <Picker.Item label="Credit Card" value="key3" />
+                                    <Picker.Item label="Net Banking" value="key4" />
+                                </Picker>
+                            </Item>
+                    </Form> 
+                    <DatePickerIOS
+                        date={this.state.date} 
+                        onDateChange={(date)=>this.setState({date})}
+                        mode="date"
+                    />
+                    <Content style={{ paddingTop: 40}}>
+                        <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey}} title="Create Event">
+                        </Button>
+                    </Content>
                 </Content>
             </Container>
-            // <View style={{flex: 1, backgroundColor: '#FEF2E4'}}>
-            //     <Image
-            //         style={{flex:1, height: undefined, width:undefined}}
-            //         source ={require('../../images/profile.png')} 
-            //         resizeMode="contain"
-                    
-            //         />
-            //     <View>
-            //         <TextInput style = {{margin:15,height:40, borderColor: '#3B291E',borderWidth:1, backgroundColor: '#FFFFFF'}}
-            //             underlineColorAndroid = "transparent"
-            //             placeholder="Event Title - EX: Resume Reviews"
-            //             placeholderTextColor="#3B291E"
-            //             autoCapitalize="none"
-            //             />
-            //     </View>
-            //     <View>
-            //         <TextInput style = {{margin:15,height:40, borderColor: '#3B291E',borderWidth:1, backgroundColor: '#FFFFFF'}}
-            //             underlineColorAndroid = "transparent"
-            //             placeholder="Event Date - EX: 2/20/2020"
-            //             placeholderTextColor="#3B291E"
-            //             autoCapitalize="none"
-            //             />
-            //     </View>
-            //     <View>
-            //             <Picker
-            //             selectedValue={this.state.language}
-            //             style={{height: 50, margin: 15}}
-                        
-            //             onValueChange={(itemValue, itemIndex) =>
-            //                 this.setState({language: itemValue})
-            //             }>
-                        
-            //             <Picker.Item label="Choose Event Type" value="default" />
-            //             <Picker.Item label="Career Event" value="careerEvent" />
-            //             <Picker.Item label="Resume Reviews" value="resumeEvent" />
-            //             <Picker.Item label="Club Event" value="clubEvent" />
-            //             </Picker>
-            //     </View>
-            //     <View>
-            //         <Button
-            //         title="Create"
-            //         style={{alignItems: 'center', margin:10,heigh:40}}
-            //         />
-            //         </View>
-            // </View>
         );
     }
 }
