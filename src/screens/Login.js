@@ -38,7 +38,6 @@ export default class Login extends Component {
         if (this.state.username === '' || this.state.password === '') {
             Alert.alert('Please Fill Out Both Fields');
         } else {
-
             this.props.navigation.navigate('Home');
         }
     }
