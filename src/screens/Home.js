@@ -25,27 +25,48 @@ export default class Home extends Component {
             //Placeholder data until the database is setup
             events:  [
                 {
-                  name: 'Event 1',
-                  description: 'Carreer fair for all students',
-                  venue: 'Bud Walton'
+                    name: 'Career Fair',
+                    description: 'Come and meet potential employers for life after college!',
+                    venue: 'Bud Walton',
+                    coordinator: 'John Doe',
+                    coordinatorEmail: 'jdoe@gmail.com',
+                    startTime: '11:00 AM',
+                    endTime: '5:00 PM',
+                    fee: 0
                 },
                 {
-                  name: 'Event 2',
-                  description: 'Google info session',
-                  venue: 'Jb Hunt'
+                    name: 'Google comes to Campus',
+                    description: 'Info session with Google. Come meet Google employees and learn more about the company as a whole.',
+                    venue: 'J.B. Hunt',
+                    coordinator: 'James Smith',
+                    coordinatorEmail: 'jsmith@gmail.com',
+                    startTime: '4:00 PM',
+                    endTime: '6:00 PM',
+                    fee: 0
                 },
                 {
-                    name: 'Event 3',
-                    description: 'New residents application party',
-                    venue: 'HillPlace'
+                    name: 'Freshman Year Welcome Party',
+                    description: 'Come celebrate the start of your new life at the University of Arkansas!',
+                    venue: 'Union Mall',
+                    coordinator: 'John Doe',
+                    coordinatorEmail: 'jdoe@gmail.com',
+                    startTime: '3:00 PM',
+                    endTime: '6:00 PM',
+                    fee: 0
                   },
                   {
-                    name: 'Event 4',
-                    description: 'Carreer fair for business majorss',
-                    venue: 'Bud Walton'
+                    name: 'Cardinal Nights',
+                    description: 'Come join us for free prizes, food, and good times!',
+                    venue: 'Union Mall',
+                    coordinator: 'Colby Crowne',
+                    coordinatorEmail: 'test@gmail.com',
+                    startTime: '7:00 PM',
+                    endTime: '11:00 PM',
+                    fee: 5
                   },
               ],
-              modalVisible: false
+              modalVisible: false,
+              selected: 0
         };
     }
 
@@ -65,24 +86,28 @@ export default class Home extends Component {
                 <View style={{marginTop: 22, flex: 1, justifyContent: 'center', marginBottom: 20}}>
                     <List>
                         <ListItem listHeader first>
-                            <Text style={styles.listHeader}>Event Details:</Text>
+                            <Text style={styles.listHeader}> {this.state.events[this.state.selected].name}</Text>
                         </ListItem>
                         <ListItem>
-                            <Text>Coordinator:</Text>
+                            <Text>Coordinator: {this.state.events[this.state.selected].coordinator}</Text>
                         </ListItem>
                         <ListItem>
-                            <Text>Participation Fee:</Text>
+                            <Text>Coordinator Email: {this.state.events[this.state.selected].coordinatorEmail}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Event Start Time: {this.state.events[this.state.selected].startTime}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Event End Time: {this.state.events[this.state.selected].endTime}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Participation Fee: {this.state.events[this.state.selected].fee} $</Text>
                         </ListItem>
                     </List>
                     <View style={{flex: 1, flexDirection: 'row', paddingTop: 30}}>
                         <View style={{flex:1}}>
                             <Button style={{justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey, marginRight: 10}}>
-                                <Text style={{color: 'white'}}> Save Event </Text>
-                            </Button>
-                        </View>
-                        <View style={{flex: 1}}>
-                            <Button style={{justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.slateGrey, marginLeft: 10}}>
-                                <Text style={{color: 'white'}}> Something </Text>
+                                <Text style={{color: 'white'}}> Attend </Text>
                             </Button>
                         </View>
                     </View>
@@ -91,9 +116,9 @@ export default class Home extends Component {
         );
     }
 
-    eventCard(item) {
+    eventCard(item, index) {
         return (
-            <TouchableOpacity onPress={() => {this.setState({modalVisible: true})}}>
+            <TouchableOpacity onPress={() => {this.setState({modalVisible: true, selected: index})}}>
                 <Content style={{ padding: 5 }}>
                     <Card>
                         <CardItem header bordered style={styles.card}>
@@ -130,14 +155,14 @@ export default class Home extends Component {
         return (
             <Container style={styles.background}> 
                     <Image
-                    source={require('../../images/homelogo.png')} 
+                    source ={require('../../images/homelogo.png')} 
                     resizeMode="contain"
                     style={{ alignSelf: 'center', marginTop: 20, width: '100%', height: '12%' }}
                     />
                 <Content>
                     <FlatList
                         data={this.state.events}
-                        renderItem={({item}) => this.eventCard(item)}
+                        renderItem={({item, index}) => this.eventCard(item, index)}
                     />
                 </Content>
                 {this.detailView()}
@@ -147,16 +172,16 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-   background: {
-       backgroundColor: 'white',
-   },
-   card: {
-       backgroundColor: COLORS.appBackground
-   },
-   listHeader: {
-        fontWeight: "bold",
-        fontSize: 20,
-        paddingBottom: 0,
-        paddingTop: 10
-    }
-});
+    background: {
+        backgroundColor: 'white',
+    },
+    card: {
+        backgroundColor: COLORS.appBackground
+    },
+    listHeader: {
+         fontWeight: "bold",
+         fontSize: 20,
+         paddingBottom: 0,
+         paddingTop: 10
+     }
+ });

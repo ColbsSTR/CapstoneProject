@@ -37,6 +37,18 @@ export default class CreateNew extends Component {
         }
     }
 
+    setPassword(text)
+    {
+        if (text === this.state.rePassword) {
+            this.setState({ password: text, equal: true});
+        } else if (text === '') {
+            this.setState({ password: '', equal: true});
+        } else {
+            this.setState({ password: text, equal: false});
+        }
+
+    }
+
     createUser()
     {
         if(this.state.equal === false) {
@@ -59,7 +71,7 @@ export default class CreateNew extends Component {
                             <Input onChangeText={ (text) => { this.setState({ username: text})}} placeholder='Enter New Username'/>
                         </Item>
                         <Item>
-                            <Input onChangeText={ (text) => { this.setState({ password: text})}} placeholder='Enter Password'/>
+                            <Input onChangeText={ (text) => { this.setPassword(text)}} placeholder='Enter Password'/>
                         </Item>
                         <Item>
                             <Input onChangeText={ (text) => { this.setRePassword(text)}} placeholder= 'Repeat Password'/>
