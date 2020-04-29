@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Button, DatePickerIOS } from 'react-native'; 
 import { Icon } from 'react-native-elements';
-import { Container, Content, Form, Item, Input, Label, Picker } from 'native-base';
+import { Container, Content, Form, Item, Input, Label, Text } from 'native-base';
 import COLORS from '../assets/colors';
+import { connect } from 'react-redux';
+import {addEvent} from '../state/Actions/addEvent';
 
 const TabIcon = (props) => (
     <Icon
@@ -12,7 +14,7 @@ const TabIcon = (props) => (
     />
 )
 
-export default class Create extends Component {
+class Create extends Component {
     static navigationOptions = {
         tabBarIcon: TabIcon,
         headerShown: false,
@@ -31,7 +33,16 @@ export default class Create extends Component {
     }
 
     componentDidMount() {
-
+        this.props.AddEvent({
+            name: 'Something New',
+            description: 'Come and meet potential employers for life after college!',
+            venue: 'New New',
+            coordinator: 'New New',
+            coordinatorEmail: 'jdoe@gmail.com',
+            startTime: '11:00 AM',
+            endTime: '5:00 PM',
+            fee: 0
+        });
     }
 
     render() {
@@ -48,26 +59,17 @@ export default class Create extends Component {
                                 <Label>Event Description</Label>
                                 <Input regular/>
                             </Item>
-                        </Item>
-                        <Item picker>
-                                <Picker
-                                    mode="dropdown"
-                                    iosIcon={<Icon name={"arrow-down"}/>}
-                                    style={{ width: undefined }}
-                                    placeholder="Select your SIM"
-                                    //placeholderStyle={{ color: "black" }}
-                                    placeholderIconColor="#007aff"
-                                    selectedValue="Computer Science"
-                                    onValueChange={(val) => {this.setState({selected2: val})}}
-                                >
-                                    <Picker.Item label="Computer Science" value="Computer Science" />
-                                    <Picker.Item label="ATM Card" value="key1" />
-                                    <Picker.Item label="Debit Card" value="key2" />
-                                    <Picker.Item label="Credit Card" value="key3" />
-                                    <Picker.Item label="Net Banking" value="key4" />
-                                </Picker>
+                            <Item>
+                                <Label>Event Category</Label>
+                                <Input regular/>
                             </Item>
+                        </Item>
                     </Form> 
+                    <Content contentContainerStyle={{ padding: 20, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold'}}>
+                            Please enter a date
+                        </Text>
+                    </Content>
                     <DatePickerIOS
                         date={this.state.date} 
                         onDateChange={(date)=>this.setState({date})}
@@ -82,3 +84,9 @@ export default class Create extends Component {
         );
     }
 }
+
+const mapDispatchToProps = {
+    AddEvent: addEvent
+}
+
+export default connect(null, mapDispatchToProps)(Create);
